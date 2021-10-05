@@ -1,0 +1,4 @@
+"""Read only queries"""
+type Query {
+  info: String!
+}

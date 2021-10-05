@@ -4,7 +4,11 @@
   "description": "JAR Automation Estimating Tool",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watchAll",
+    "dev": "NODE_ENV=development nodemon ./index.js -e js,graphql --watch src",
+    "test:ci": "jest",
+    "test:coverage": "jest --coverage",
+    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -17,13 +21,17 @@
   },
   "homepage": "https://gitlab.com/joyja/estimating#readme",
   "dependencies": {
+    "@graphql-tools/schema": "^8.2.0",
     "apollo-server-express": "^3.3.0",
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "graphql": "^15.6.1",
+    "graphql-subscriptions": "^1.2.1",
     "graphql-tag": "^2.12.5",
     "jsonwebtoken": "^8.5.1",
+    "make-promises-safe": "^5.1.0",
     "pg": "^8.7.1",
+    "subscriptions-transport-ws": "^0.9.19",
     "winston": "^3.3.3"
   },
   "devDependencies": {
