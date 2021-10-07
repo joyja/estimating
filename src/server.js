@@ -1,4 +1,5 @@
 const { createServer } = require('http')
+const { PubSub } = require('graphql-subscriptions')
 const { execute, subscribe } = require('graphql')
 const { SubscriptionServer } = require('subscriptions-transport-ws')
 const { makeExecutableSchema } = require('@graphql-tools/schema')
@@ -12,6 +13,7 @@ const fs = require('fs')
 
 const start = async function () {
   let subscriptionServer
+  const pubsub = new PubSub()
   const app = express()
 
   const httpServer = createServer(app)
@@ -28,6 +30,7 @@ const start = async function () {
     context() {
       // lookup userId by token, etc.
       // return { userId }
+      return { pubsub }
     },
     plugins: [
       ApolloServerPluginLandingPageGraphQLPlayground(),
@@ -49,6 +52,9 @@ const start = async function () {
       execute,
       subscribe,
       onConnect() {
+        return {
+          pubsub
+        }
         // lookup userId by token, etc.
         // return { userId }
       },

@@ -1,4 +1,14 @@
+type Counter {
+  count: Int!
+  countStr: String
+}
+
 """Read only queries"""
 type Query {
   info: String!
+}
+
+"""Subscriptions (real time data)"""
+type Subscription {
+  counter: Counter!
 }
